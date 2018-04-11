@@ -11,6 +11,7 @@ export class AttendanceComponent implements OnInit {
     listAttendance: AttModel[];
     selectedAtt: AttModel;
     oneUserAttendance: AttModel[];
+    listLeave: number[];
 
   constructor(private attendanceService: AttendanceService) { }
 
@@ -26,6 +27,11 @@ export class AttendanceComponent implements OnInit {
   getListAttendance(): void {
     this.attendanceService.getListAttendance()
     .subscribe(listAttendance => this.listAttendance = listAttendance);
+  }
+
+  checkLeave(id: number): void {
+    this.attendanceService.getReasonOfLeaving(id)
+    .subscribe(listLeave => this.listLeave = listLeave);
   }
 
   onSelect(att: AttModel): void {

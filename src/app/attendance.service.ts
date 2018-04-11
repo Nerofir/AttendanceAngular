@@ -38,4 +38,25 @@ export class AttendanceService {
     this.listOfAtt = listOfAtt;
     return of(this.listOfAtt);
   }
+
+  getReasonOfLeaving(id: number): Observable<number[]> {
+    let listLeave: number[] = [0,0,0];
+    let tempo: AttModel[] = attList;
+    for (let i=0; i < attList.length; i++) {
+      if (tempo[i].fk_user == id) {
+        if (tempo[i].type == 1) {
+          listLeave[0] = listLeave[0] + 1;
+        }
+        if (tempo[i].type == 2) {
+          listLeave[1] = listLeave[1] + 1;
+        }
+        if (tempo[i].type == 3) {
+          listLeave[2] = listLeave[2] + 1;
+        }
+      }
+    }
+    return of(listLeave);
+  }
+
+
 }

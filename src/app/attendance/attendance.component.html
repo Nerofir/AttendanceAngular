@@ -15,20 +15,39 @@
       <td>{{att.type}}</td>
 	</tr>
 </table>
+	<div class="container">
+	  <div class="row">
+		<div class="col-sm-4">
+		  <h4>Détail (click on a row)</h4>
+		  <div  *ngIf="selectedAtt">
+		  		<div><span>User id : </span>{{selectedAtt.fk_user}}</div>
+		  		<div><span>time: </span>{{selectedAtt.time}}</div>
+		  		<div><span>direct: </span>{{selectedAtt.direct}}</div>
+		  		<div><span>type: </span>{{selectedAtt.type}}</div>
+			</div>
+		</div>
 
-<div class="onTheLeft" *ngIf="selectedAtt">
-  <h2>{{ selectedAtt.fk_user }} Details</h2>
-  <div><span>User id : </span>{{selectedAtt.fk_user}}</div>
-  <div><span>time: </span>{{selectedAtt.time}}</div>
-  <div><span>direct: </span>{{selectedAtt.direct}}</div>
-  <div><span>type: </span>{{selectedAtt.type}}</div>
+		<div class="col-sm-4" >
+		<h4>Fk_user Search</h4>
+		    <input #searchBox (keyup)="search(searchBox.value)" />
+			<div class="withId" *ngFor="let attend of oneUserAttendance">
+		    	<div>{{attend.rid}}, {{attend.fk_user}}, {{attend.time}}, {{attend.direct}}, {{attend.type}}</div>  
+		    </div>
+		</div>
+		<div class="col-sm-4" >
+		<h4>Leaving Reason for user (fk_user)</h4>
+		    <input #leaveBox (keyup)="checkLeave(leaveBox.value)" />
+			<div class="withId" *ngIf="listLeave == undefined">
+				<p>General: 0</p>
+		        <p>Vacation: 0</p>
+				<p>Doctor: 0</p>
+		    </div>
+		   	<div class="withId" *ngIf="listLeave != undefined">
+				<p>General: {{listLeave[0]}}</p>
+		        <p>Vacation: {{listLeave[1]}}</p>
+				<p>Doctor: {{listLeave[2]}}</p>
+		    </div>
+		</div>
+	</div>
 </div>
 
-<div class="onTheLeft" >
-<h4>Fk_user Search</h4>
-    <input #searchBox (keyup)="search(searchBox.value)" />
-	<div class="withId" *ngFor="let attend of oneUserAttendance">
-    	<div>{{attend.rid}}, {{attend.fk_user}}, {{attend.time}}, {{attend.direct}}, {{attend.type}}</div>  
-    </div>
-
-</div>
